@@ -1,0 +1,17 @@
+:root { color-scheme: light; --ground:#FBDEDE; --card:#FDF9F4; --ink:#2A1F24; --soft:#6E5A62; --accent:#91355C; --line:#EDC3C6; }
+* { box-sizing: border-box; }
+body { margin:0; background:linear-gradient(#F3C4C8, #FBDEDE 22rem, #FCEBDD); background-attachment:fixed; color:var(--ink); font:17px/1.6 -apple-system, system-ui, "Segoe UI", sans-serif; }
+main { max-width:42rem; margin:0 auto; padding:2.5rem 1.25rem 4rem; }
+article { background:var(--card); border-radius:28px; padding:2rem 1.5rem; box-shadow:0 12px 30px rgba(145,53,92,.10); }
+h1, h2 { font-family:"Iowan Old Style", "Palatino Linotype", Georgia, serif; font-weight:500; }
+h1 { font-size:2.1rem; line-height:1.15; margin:0 0 .25rem; }
+h1 em { font-style:normal; color:var(--accent); }
+h2 { font-size:1.3rem; color:var(--accent); margin:2.2rem 0 .4rem; }
+p, li { margin:.5rem 0; }
+ul { padding-left:1.2rem; }
+a { color:var(--accent); }
+.date, .foot { color:var(--soft); font-size:.9rem; }
+.short { border:1px solid var(--line); border-radius:18px; padding:.75rem 1.1rem; margin:1.25rem 0; background:#FEF1EF; }
+nav { margin:0 0 1.25rem; font-size:.95rem; }
+nav a { margin-right:1rem; text-decoration:none; }
+.foot { margin-top:1.5rem; text-align:center; }
