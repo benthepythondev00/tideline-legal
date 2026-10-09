@@ -2,26 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tideline: Period &amp; Mood</title>
-<meta name="description" content="Tideline is a private cycle and mood record for iPhone, made for PMS and PMDD. What you log stays on your phone.">
-<link rel="stylesheet" href="style.css">
+<title>Tideline: period, PMS and PMDD tracker for iPhone</title>
+<meta name="description" content="Track your period and see the next one coming. Write one sentence a day about the week before it, and after two cycles take a report to your doctor. No account.">
+<link rel="canonical" href="https://benthepythondev00.github.io/tideline-legal/">
+<meta name="apple-itunes-app" content="app-id=6814561188">
+<meta property="og:type" content="website"><meta property="og:url" content="https://benthepythondev00.github.io/tideline-legal/">
+<meta property="og:title" content="Tideline: period, PMS and PMDD tracker for iPhone">
+<meta property="og:description" content="See your next period coming, write one sentence a day, and bring a clear record to your doctor. No account.">
+<meta property="og:image" content="https://benthepythondev00.github.io/tideline-legal/img/04.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon.png">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "MobileApplication", "name": "Tideline: Period & Mood", "operatingSystem": "iOS", "applicationCategory": "HealthApplication", "url": "https://benthepythondev00.github.io/tideline-legal/", "downloadUrl": "https://apps.apple.com/app/id6814561188", "image": "https://benthepythondev00.github.io/tideline-legal/icon.png", "description": "Period, PMS and PMDD tracker for iPhone. One sentence a day, a report for your doctor after two cycles, no account.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "Ben Jonas Goedeke"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I track PMDD for my doctor?", "acceptedAnswer": {"@type": "Answer", "text": "Doctors usually want daily notes from at least two cycles before they talk about PMDD (IAPMD). Tideline asks for one sentence a day and, after two cycles, puts the week before each period next to the week after, day by day, in a PDF you can print or send. It describes what you logged and doesn't diagnose anything."}}, {"@type": "Question", "name": "Why do I feel worse before my period?", "acceptedAnswer": {"@type": "Answer", "text": "After ovulation comes the luteal phase. In the days before a period many people notice a shorter fuse, low mood, cravings or tiredness (NHS). Tideline shows which phase you're in each day and what you logged around the same day in earlier cycles."}}, {"@type": "Question", "name": "Is there a period tracker without an account?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Tideline has no sign-up and no ads. Your entries are kept on your iPhone and come along in your iPhone backup."}}, {"@type": "Question", "name": "Is Tideline free?", "acceptedAnswer": {"@type": "Answer", "text": "Tracking, predictions and the daily sentence are free. Tideline Plus adds the insights and the doctor's report."}}, {"@type": "Question", "name": "Does Tideline work for PMS as well as PMDD?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You log your days the same way; the report shows how the week before your period compares with the rest of your cycle, whatever the reason."}}, {"@type": "Question", "name": "Can I move over from Flo?", "acceptedAnswer": {"@type": "Answer", "text": "Bring your past dates in through Apple Health, or mark any past day as the day your period started."}}]}]</script>
+<link rel="stylesheet" href="home.css">
+<style>
+body { background: var(--card); }
+.bar { position: sticky; top: 0; z-index: 2; background: rgba(253,249,244,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-line); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 22px Bodoni, Georgia, serif; color: var(--ink); text-decoration: none; }
+.brand img { width: 34px; height: 34px; border-radius: 9px; }
+.bar .store img { height: 40px; }
+.intro { text-align: center; padding: 72px 0 40px; background: var(--flow); }
+.intro h1 { font-size: clamp(40px, 6vw, 68px); line-height: 1.06; margin: 14px auto 18px; max-width: 14ch; }
+.intro p { color: var(--ink2); font-size: 19px; max-width: 34ch; margin: 0 auto 24px; }
+.intro .store { display: inline-block; }
+.q { padding: 72px 0; }
+.q .wrap { display: grid; grid-template-columns: 1fr 340px; gap: 64px; align-items: center; }
+.q.flip .wrap { grid-template-columns: 340px 1fr; }
+.q.flip img { order: -1; }
+.q h2 { font-size: clamp(30px, 3.6vw, 40px); line-height: 1.12; margin: 12px 0 16px; }
+.q p { color: var(--ink2); font-size: 17px; max-width: 52ch; margin: 0 0 12px; }
+.q img { width: 100%; border-radius: 24px; box-shadow: 0 14px 34px rgba(145,53,92,.14); display: block; }
+.q + .q { border-top: 1px solid var(--card-line); }
+.plum { background: #2B171F; color: #FDF1DE; }
+.plum p { color: #E6CFCF; } .plum .eyebrow { color: var(--gold); } .plum h2 em { color: #F5C9C8; } .plum a { color: #F5C9C8; }
+.more { padding: 64px 0 24px; }
+.more h2 { font-size: clamp(30px, 3.6vw, 40px); margin-bottom: 20px; }
+.end { text-align: center; padding: 48px 0 0; }
+@media (max-width: 760px) {
+  .bar .store img { height: 34px; }
+  .q { padding: 48px 0; }
+  .q .wrap, .q.flip .wrap { grid-template-columns: 1fr; gap: 28px; }
+  .q.flip img { order: 0; }
+  .q img { max-width: 300px; margin: 0 auto; }
+}
+.reads a { display: block; padding: 16px 24px; font: 19px/1.3 Bodoni, Georgia, serif; color: var(--ink); text-decoration: none; }
+.reads a + a { border-top: 1px solid var(--card-line); }
+.reads a:hover { color: var(--accent-ink); }
+</style>
 </head>
-<body><main>
-<nav><a href="reads/index.html">Reads</a><a href="privacy.html">Privacy</a><a href="health-data.html">Health data</a><a href="terms.html">Terms</a><a href="support.html">Support</a></nav>
-<article>
-<h1>Tideline<br><em>Period &amp; Mood</em></h1>
-<p>A private record of your cycle and how you feel, made for PMS and PMDD. Write one sentence a day. After two cycles you can hand your doctor a dated report instead of trying to remember.</p>
-<p>What you log stays on your phone. There is no account and no server behind it.</p>
-<p>Tideline is for iPhone.</p>
-<h2>Pages</h2>
-<ul>
-<li><a href="reads/index.html">Reads on PMS, PMDD and your cycle, with their sources</a></li>
-<li><a href="privacy.html">Privacy policy</a></li>
-<li><a href="health-data.html">Consumer health data privacy policy</a></li>
-<li><a href="terms.html">Terms of use</a></li>
-<li><a href="support.html">Help and contact</a></li>
-</ul>
-</article>
-<p class="foot">© 2026 Ben Jonas Goedeke</p>
-</main></body>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="#"><img src="icon.png" alt="">Tideline</a>
+  <a class="store" href="https://apps.apple.com/app/apple-store/id6814561188?pt=129315704&amp;ct=site&amp;mt=8"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store"></a>
+</div></header>
+
+<section class="intro">
+  <div class="eyebrow">For iPhone · Free to track · No account</div>
+  <h1 class="serif">A period tracker for <em>PMS &amp; PMDD.</em></h1>
+  <p>See your next period coming, write one sentence a day, and bring a clear record to your doctor.</p>
+  <a class="store" href="https://apps.apple.com/app/apple-store/id6814561188?pt=129315704&amp;ct=site&amp;mt=8"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store"></a>
+</section>
+
+<section class="q"><div class="wrap">
+  <div><div class="eyebrow">Your next period</div>
+    <h2 class="serif">When is my period <em>coming?</em></h2>
+    <p>Tideline counts down to your next period and to ovulation, and shows the predicted window rather than one exact day. Once two cycles are recorded, the prediction learns from your own dates.</p>
+    <p>Already logging somewhere else? Past period dates can be read from Apple Health, and you see them before anything is added.</p></div>
+  <img src="today.jpg" alt="8 days until your period, 22 days until ovulation" loading="lazy">
+</div></section>
+
+<section class="q flip"><div class="wrap">
+  <div><div class="eyebrow">The week before</div>
+    <h2 class="serif">Why do I feel worse before <em>my period?</em></h2>
+    <p>After ovulation comes the luteal phase. In the days before a period many people notice a shorter fuse, low mood, cravings or tiredness (<a href="https://www.nhs.uk/conditions/pre-menstrual-syndrome/">NHS</a>).</p>
+    <p>Write one sentence about your day, typed or spoken. Tideline picks out the symptoms and shows what you logged around the same day in earlier cycles.</p></div>
+  <img src="img/03.jpg" alt="One sentence a day, symptoms picked out" loading="lazy">
+</div></section>
+
+<section class="q plum"><div class="wrap">
+  <div><div class="eyebrow">For your appointment</div>
+    <h2 class="serif">How do I track PMDD <em>for my doctor?</em></h2>
+    <p>Doctors usually want daily notes from at least two cycles before they talk about PMDD (<a href="https://iapmd.org/">IAPMD</a>). That's hard to remember in a ten-minute appointment.</p>
+    <p>After two cycles, Tideline puts the week before each period next to the week after, day by day, in a PDF you can print or send. It describes what you logged and doesn't diagnose anything.</p></div>
+  <img src="img/04.jpg" alt="The report for your doctor" loading="lazy">
+</div></section>
+
+<section class="q flip"><div class="wrap">
+  <div><div class="eyebrow">Private by design</div>
+    <h2 class="serif">A period tracker <em>without an account.</em></h2>
+    <p>No sign-up and no ads. Your entries are kept on your iPhone and come along in your iPhone backup.</p>
+    <p>If you want, your partner can get a heads-up before your harder week. You choose what he sees, and he never sees what you write.</p></div>
+  <img src="img/09.jpg" alt="Stays on your phone: no account, no ads" loading="lazy">
+</div></section>
+
+<section class="more wrap">
+  <hr class="rule" style="margin-bottom:48px">
+  <h2 class="serif">More <em>questions.</em></h2>
+  <div class="card faq">
+    <details><summary>Is Tideline free?</summary>
+      <p>Tracking, predictions and the daily sentence are free. Tideline Plus adds the insights and the doctor's report.</p></details>
+    <details><summary>Does Tideline work for PMS as well as PMDD?</summary>
+      <p>Yes. You log your days the same way; the report shows how the week before your period compares with the rest of your cycle, whatever the reason.</p></details>
+    <details><summary>Can I move over from Flo?</summary>
+      <p>Bring your past dates in through Apple Health, or mark any past day as the day your period started.</p></details>
+  </div>
+  <div class="end"><a class="store" href="https://apps.apple.com/app/apple-store/id6814561188?pt=129315704&amp;ct=site&amp;mt=8"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="margin:0 auto"></a></div>
+</section>
+<section class="more wrap">
+  <h2 class="serif">Reads, <em>with their sources.</em></h2>
+  <div class="card faq reads">
+    <a href="reads/why-two-cycles.html">Why doctors ask for two cycles</a>
+    <a href="reads/pms-or-pmdd.html">PMS or PMDD? How they differ</a>
+    <a href="reads/four-phases.html">Your cycle, in four parts</a>
+    <a href="reads/plan-hard-week.html">Plan your hard week</a>
+    <a href="reads/questions-doctor.html">Questions for your doctor</a>
+    <a href="reads/index.html">All reads →</a>
+  </div>
+</section>
+<footer><a href="reads/index.html">Reads</a> · <a href="privacy.html">Privacy</a> · <a href="health-data.html">Health data</a> · <a href="terms.html">Terms</a> · <a href="support.html">Support</a><br>© 2026 Ben Jonas Goedeke</footer>
+</body>
 </html>
