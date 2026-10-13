@@ -1,8 +1,8 @@
 /* Tideline web, in the app's couture language (src/theme/palettes.ts 'rose', src/theme/tokens.ts). */
-@font-face { font-family: Bodoni; src: url(fonts/BodoniModa_400Regular.ttf); }
-@font-face { font-family: Bodoni; font-style: italic; src: url(fonts/BodoniModa_400Regular_Italic.ttf); }
-@font-face { font-family: Jakarta; src: url(fonts/PlusJakartaSans_400Regular.ttf); }
-@font-face { font-family: Jakarta; font-weight: 600; src: url(fonts/PlusJakartaSans_600SemiBold.ttf); }
+@font-face { font-family: Bodoni; src: url(fonts/BodoniModa_400Regular.woff2) format("woff2"), url(fonts/BodoniModa_400Regular.ttf); font-display: swap; }
+@font-face { font-family: Bodoni; font-style: italic; src: url(fonts/BodoniModa_400Regular_Italic.woff2) format("woff2"), url(fonts/BodoniModa_400Regular_Italic.ttf); font-display: swap; }
+@font-face { font-family: Jakarta; src: url(fonts/PlusJakartaSans_400Regular.woff2) format("woff2"), url(fonts/PlusJakartaSans_400Regular.ttf); font-display: swap; }
+@font-face { font-family: Jakarta; font-weight: 600; src: url(fonts/PlusJakartaSans_600SemiBold.woff2) format("woff2"), url(fonts/PlusJakartaSans_600SemiBold.ttf); font-display: swap; }
 :root {
   --ground: #FBDEDE; --card: #FDF9F4; --card-line: #F1DDDD; --gold: #C1A77F; --gold-deep: #795D3A;
   --accent: #B92C6F; --accent-ink: #91355C; --ink: #2B171F; --ink2: #644B51; --ink3: #8F7477;
