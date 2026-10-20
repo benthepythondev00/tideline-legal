@@ -1,3 +1,10 @@
 User-agent: *
 Allow: /
+
+User-agent: meta-webindexer
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://gettideline.app/sitemap.xml
