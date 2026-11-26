@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luteal Phase Calculator: Your PMDD Window · Tideline</title>
+<meta name="description" content="Free luteal phase calculator: enter your last period and cycle length to see your estimated ovulation, luteal phase and the premenstrual week PMDD is judged on, for the next three cycles. No sign-up, nothing saved.">
+<meta name="apple-itunes-app" content="app-id=6814561188">
+<link rel="canonical" href="https://gettideline.app/reads/luteal-phase-calculator.html">
+<meta property="og:title" content="Luteal phase calculator: your PMDD window"><meta property="og:description" content="See your estimated luteal phase and premenstrual week for the next three cycles. Runs in your browser, nothing is saved."><meta property="og:type" content="website"><meta property="og:url" content="https://gettideline.app/reads/luteal-phase-calculator.html">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Luteal phase and PMDD window calculator", "url": "https://gettideline.app/reads/luteal-phase-calculator.html", "applicationCategory": "HealthApplication", "operatingSystem": "Any (runs in the browser)", "browserRequirements": "Requires JavaScript", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Estimates ovulation, the luteal phase and the premenstrual week for the next three cycles from the first day of your last period and your usual cycle length. Calculated in the browser; nothing is stored or sent.", "publisher": {"@type": "Organization", "name": "Tideline", "url": "https://gettideline.app/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do you calculate the luteal phase?", "acceptedAnswer": {"@type": "Answer", "text": "Add your cycle length to the first day of your last period to estimate your next period. Count back your luteal length (14 days if you don't know it) to estimate ovulation. The luteal phase runs from the day after ovulation to the day before your period."}}, {"@type": "Question", "name": "When is the PMDD window?", "acceptedAnswer": {"@type": "Answer", "text": "PMDD is judged on the final week before your period: symptoms are present in most cycles in that week, start to ease within a few days after the period starts, and are minimal or gone in the week after it."}}, {"@type": "Question", "name": "How long is the luteal phase?", "acceptedAnswer": {"@type": "Answer", "text": "IAPMD describes about 12 to 14 days. The US Office on Women's Health notes the time from ovulation to the next period can run from about one week to 19 days, so a calculator gives an estimate, not a date."}}, {"@type": "Question", "name": "Can a calculator tell me if I have PMDD?", "acceptedAnswer": {"@type": "Answer", "text": "No. It shows when to pay attention. A PMDD diagnosis rests on daily symptom ratings over at least two cycles, compared between the week before your period and the week after it."}}]}</script>
+<link rel="stylesheet" href="../style.css">
+<style>h3{font-size:1.05rem;margin:1.2rem 0 .2rem}
+#calc{border:1px solid var(--line);border-radius:18px;padding:1rem 1.1rem 1.2rem;margin:1.25rem 0;background:#FFFCF8}
+#calc .row{display:flex;flex-wrap:wrap;gap:1rem 1.5rem}
+#calc label{display:block;font-weight:600;font-size:.95rem;margin-bottom:.25rem}
+#calc .hint{display:block;font-weight:400;color:var(--soft);font-size:.85rem}
+#calc input{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:12px;padding:.5rem .7rem;min-height:2.75rem}
+#calc input[type=number]{width:6.5rem}
+#calc .field{flex:1 1 12rem}
+#calc button{font:inherit;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:.7rem 1.4rem;margin-top:1rem;cursor:pointer;min-height:2.75rem}
+#calc button:focus-visible,#calc input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#msg{color:var(--accent);margin:.6rem 0 0}#msg:empty{display:none}
+#result:empty{display:none}
+.now{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:1.25rem;margin:.2rem 0 .8rem}
+.cycles{width:100%;border-collapse:collapse;font-size:.95rem;font-variant-numeric:tabular-nums}
+.cycles th,.cycles td{text-align:left;padding:.45rem .5rem .45rem 0;border-bottom:1px solid #F3DCDD;vertical-align:top}
+.cycles th{font-weight:600;color:var(--soft);font-size:.85rem}
+.cycles td.pm{color:var(--accent);font-weight:600}
+.cycles td:first-child{white-space:nowrap}
+.bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.8rem 0 .3rem;background:#F6E3E1}
+.bar span{display:block;height:100%}
+.bar .f{background:#E9B9C0}.bar .o{background:#C77B95}.bar .l{background:#DCA2B2}.bar .p{background:var(--accent)}
+.key{font-size:.82rem;color:var(--soft);display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin:0 0 .6rem}
+.key i{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+@media (max-width:30rem){.cycles th:nth-child(2),.cycles td:nth-child(2){display:none}}
+</style>
+</head>
+<body><main>
+<nav><a href="index.html">All reads</a><a href="../index.html">Tideline</a><a href="../privacy.html">Privacy</a></nav>
+<article>
+<h1>Luteal phase calculator<br><em>and your PMDD window</em></h1>
+<p class="date">By Ben Jonas Goedeke · 4 min read · checked against its sources · updated 26 Nov 2026</p>
+
+<p>Enter the first day of your last period and how long your cycles usually run. You’ll see the estimated day you ovulate, your luteal phase, and the week before your period, which is the week doctors look at for PMDD. It covers your next three cycles, so you can put the hard weeks in your calendar now. Everything is worked out on this page. Nothing is saved or sent, and there is no sign-up.</p>
+
+<form id="calc" novalidate>
+<div class="row">
+<div class="field"><label for="lmp">First day of your last period</label><input type="date" id="lmp" required></div>
+<div><label for="len">Usual cycle length <span class="hint">days, 21 to 45</span></label><input type="number" id="len" min="21" max="45" value="28" inputmode="numeric"></div>
+<div><label for="lut">Luteal length <span class="hint">days, leave 14 if unsure</span></label><input type="number" id="lut" min="10" max="16" value="14" inputmode="numeric"></div>
+</div>
+<button type="submit">Show my luteal phase</button>
+<p id="msg" role="alert"></p>
+</form>
+<div id="result" class="short" aria-live="polite"></div>
+
+<h2>How the calculator counts</h2>
+<p>It uses the same arithmetic a doctor would use on paper. Your next period is expected on the first day of your last period plus your cycle length. Ovulation is estimated by counting back your luteal length from that date, which is why the default is 14: the second half of the cycle tends to be steadier than the first, so most of the difference between a 26-day and a 34-day cycle happens before ovulation, not after it. The luteal phase is every day from the one after ovulation up to the day before your period.</p>
+<p>The premenstrual week is the seven days just before your period. That is the window in the definition of PMDD: symptoms show up in that final week in most cycles, start to ease within a few days of the period starting, and are minimal or gone in the week after it. <a href="https://www.iapmd.org/pmdd">IAPMD</a> describes the same pattern, with symptoms that can begin anywhere in the luteal phase and lift once the period arrives.</p>
+
+<h2>Why it is an estimate</h2>
+<p><a href="https://www.iapmd.org/pmdd">IAPMD</a> describes a luteal phase of about 12 to 14 days. The <a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">US Office on Women’s Health</a> notes that the time from ovulation to the next period can run from about one week to 19 days, and cycles shift with stress, illness, travel, breastfeeding and the years before menopause. If your cycles vary by more than a few days, enter your average and read the dates as a range. If you have used ovulation tests or tracked temperature and know your own luteal length, put it in the third box.</p>
+<p>Hormonal birth control changes the picture. Most combined pills, patches and rings stop ovulation, so there is no luteal phase to calculate, and the bleed in the break week is a withdrawal bleed. Some people still notice mood changes on a schedule; <a href="birth-control-mood.html">birth control and mood</a> covers that.</p>
+
+<h2>What to do with your dates</h2>
+<ul>
+<li><strong>Write a line every day, not only in the bad week.</strong> A PMDD diagnosis compares the week before your period with the week after it, so the good days are evidence too. <a href="why-two-cycles.html">Why doctors ask for two cycles</a> explains why one month is not enough.</li>
+<li><strong>Put the premenstrual weeks in your calendar.</strong> Fewer deadlines, fewer hard conversations, more sleep. <a href="plan-hard-week.html">Plan your hard week</a> has a simple way to do it.</li>
+<li><strong>Check your dates against what happened.</strong> When your period comes early or late, the next prediction moves with it. After a few cycles your real average is better than any default.</li>
+<li><strong>Bring the record, not the calculator.</strong> A doctor will want daily ratings over two cycles. The <a href="pmdd-tracker-printable.html">free printable PMDD chart</a> works on paper.</li>
+</ul>
+<p>If your luteal weeks bring thoughts of harming yourself, call or text <a href="https://988lifeline.org/">988</a> in the US, or your local emergency number. You don’t have to wait for the period to arrive for it to count.</p>
+
+<p class="short"><strong>Let your phone do the counting.</strong> Tideline is a period and mood tracker for iPhone. It shows which phase you’re in each day, moves its predictions when your period comes early or late, and after two cycles puts the week before your period next to days 4 to 10, the comparison a doctor looks at. No account, no ads, and your entries stay on your phone. Logging is free; the doctor’s report is part of Tideline Plus, a paid subscription with a free trial.<br><a href="https://apps.apple.com/app/apple-store/id6814561188?pt=129315704&amp;ct=seo-luteal-calculator&amp;mt=8">Get Tideline on the App Store</a></p>
+
+<h2>Common questions</h2>
+<h3>How do you calculate the luteal phase?</h3><p>Add your cycle length to the first day of your last period to estimate your next period. Count back your luteal length (14 days if you don’t know it) to estimate ovulation. The luteal phase runs from the day after ovulation to the day before your period.</p>
+<h3>When is the PMDD window?</h3><p>PMDD is judged on the final week before your period: symptoms are present in most cycles in that week, start to ease within a few days after the period starts, and are minimal or gone in the week after it.</p>
+<h3>How long is the luteal phase?</h3><p>IAPMD describes about 12 to 14 days. The US Office on Women’s Health notes the time from ovulation to the next period can run from about one week to 19 days, so a calculator gives an estimate, not a date.</p>
+<h3>Can a calculator tell me if I have PMDD?</h3><p>No. It shows when to pay attention. A PMDD diagnosis rests on daily symptom ratings over at least two cycles, compared between the week before your period and the week after it. The <a href="pmdd-self-check.html">PMDD self-check</a> asks the questions a doctor would start with.</p>
+
+<!-- related --><h2>Keep reading</h2><ul><li><a href="luteal-phase-symptoms.html">Luteal phase symptoms in your body and mood</a></li><li><a href="four-phases.html">Your cycle, in four parts</a></li><li><a href="pms-or-pmdd.html">PMS or PMDD? How they differ</a></li></ul><!-- /related -->
+<h2>Sources</h2><ul><li>IAPMD: <a href="https://www.iapmd.org/pmdd">What is PMDD?</a></li><li>US Office on Women’s Health: <a href="https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle">Your menstrual cycle</a></li><li>US Office on Women’s Health: <a href="https://womenshealth.gov/menstrual-cycle/premenstrual-syndrome/premenstrual-dysphoric-disorder-pmdd">Premenstrual dysphoric disorder (PMDD)</a></li></ul>
+</article>
+<p class="foot">© 2026 Ben Jonas Goedeke · Tideline keeps a record. It does not diagnose, treat or prevent any condition. This calculator gives estimates only and is not a method of contraception.</p>
+</main>
+<script>
+(function () {
+  var DAY = 86400000;
+  var form = document.getElementById('calc'), out = document.getElementById('result'), msg = document.getElementById('msg');
+  var lmpIn = document.getElementById('lmp');
+  function utc(d) { return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function parse(v) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : NaN; }
+  function fmt(t, year) { return new Date(t).toLocaleDateString(undefined, year ? { timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' } : { timeZone: 'UTC', weekday: 'short', month: 'short', day: 'numeric' }); }
+  function span(a, b) { return fmt(a) + ' – ' + fmt(b); }
+  var today = utc(new Date());
+  lmpIn.max = new Date(today).toISOString().slice(0, 10);
+  // Pure calculation, also exposed for tests: dates are UTC midnights in ms.
+  window.tidelineLuteal = function (lmp, len, lut, now) {
+    var start = lmp;
+    while (start + len * DAY <= now) start += len * DAY;   // roll forward to the cycle that contains today
+    var cycles = [];
+    for (var i = 0; i < 3; i++) {
+      var s = start + i * len * DAY, next = s + len * DAY, ov = next - lut * DAY;
+      cycles.push({ start: s, ovulation: ov, lutealStart: ov + DAY, lutealEnd: next - DAY, pmStart: next - 7 * DAY, pmEnd: next - DAY, next: next });
+    }
+    var c = cycles[0], day = Math.round((now - c.start) / DAY) + 1, phase;
+    if (day <= 5) phase = 'your period (if it came on time)';
+    else if (now < c.ovulation - DAY) phase = 'the follicular phase';
+    else if (now <= c.ovulation + DAY) phase = 'around ovulation';
+    else if (now < c.pmStart) phase = 'the luteal phase';
+    else phase = 'the premenstrual week';
+    return { cycles: cycles, day: day, phase: phase, daysToPm: Math.round((c.pmStart - now) / DAY) };
+  };
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    msg.textContent = ''; out.innerHTML = '';
+    var lmp = parse(lmpIn.value), len = Math.round(+document.getElementById('len').value), lut = Math.round(+document.getElementById('lut').value);
+    if (isNaN(lmp)) { msg.textContent = 'Pick the first day of your last period.'; return; }
+    if (lmp > today) { msg.textContent = 'That date is in the future. Pick the first day of your most recent period.'; return; }
+    if (!(len >= 21 && len <= 45)) { msg.textContent = 'Cycle length should be between 21 and 45 days. Cycles outside that range are worth mentioning to a doctor.'; return; }
+    if (!(lut >= 10 && lut <= 16)) { msg.textContent = 'Luteal length should be between 10 and 16 days. Leave it at 14 if you are not sure.'; return; }
+    if (len - lut < 8) { msg.textContent = 'That luteal length is too long for this cycle length. Leave it at 14 or check your cycle length.'; return; }
+    var r = window.tidelineLuteal(lmp, len, lut, today), c = r.cycles[0];
+    var when = r.daysToPm > 1 ? 'Your next premenstrual week starts in ' + r.daysToPm + ' days, on ' + fmt(c.pmStart) + '.'
+      : r.daysToPm === 1 ? 'Your premenstrual week starts tomorrow.' : 'You are in that week now. Your period is expected on ' + fmt(c.next) + '.';
+    var w = function (a, b) { return ((b - a) / DAY + 1) / len * 100; };
+    var html = '<p class="now">Today is likely day ' + r.day + ' of your cycle, in ' + r.phase + '.</p>';
+    html += '<p>' + when + '</p>';
+    html += '<div class="bar" aria-hidden="true"><span class="f" style="width:' + w(c.start, c.ovulation - 2 * DAY) + '%"></span><span class="o" style="width:' + w(c.ovulation - DAY, c.ovulation + DAY) + '%"></span><span class="l" style="width:' + w(c.ovulation + 2 * DAY, c.pmStart - DAY) + '%"></span><span class="p" style="width:' + w(c.pmStart, c.pmEnd) + '%"></span></div>';
+    html += '<p class="key"><span><i style="background:#E9B9C0"></i>Period and follicular</span><span><i style="background:#C77B95"></i>Around ovulation</span><span><i style="background:#DCA2B2"></i>Luteal</span><span><i style="background:var(--accent)"></i>Premenstrual week</span></p>';
+    html += '<table class="cycles"><thead><tr><th>Cycle starting</th><th>Ovulation (est.)</th><th>Luteal phase</th><th>Premenstrual week</th></tr></thead><tbody>';
+    r.cycles.forEach(function (x) {
+      html += '<tr><td>' + fmt(x.start) + '</td><td>' + fmt(x.ovulation) + '</td><td>' + span(x.lutealStart, x.lutealEnd) + '</td><td class="pm">' + span(x.pmStart, x.pmEnd) + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    html += '<p>Next period expected around ' + fmt(c.next, true) + '. Ovulation can shift by several days, so treat each date as the middle of a range.</p>';
+    html += '<p>To see whether your symptoms really follow these dates, write one line a day for two cycles: on paper with the <a href="pmdd-tracker-printable.html">free PMDD chart</a>, or in <a href="https://apps.apple.com/app/apple-store/id6814561188?pt=129315704&amp;ct=seo-luteal-calculator-result&amp;mt=8">Tideline</a>, which keeps these predictions up to date as your periods come.</p>';
+    out.innerHTML = html;
+    out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+})();
+</script>
+</body>
+</html>
