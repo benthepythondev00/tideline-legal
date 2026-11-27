@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!-- web2app quiz (income-engine backend/app/web2app.py render(), app "tideline"), restyled in Tideline's look. The engine
+     calls (visit, step, checkout, return) and the redeem_url success page are unchanged. Refresh: curl <engine>/w2a/tideline/page. -->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Do your hard days follow your cycle? A 5-question check | Tideline</title>
+<meta name="description" content="Five quick questions about when your hardest days come and what they do to you, then what a daily note in Tideline would show you. For iPhone.">
+<link rel="canonical" href="https://gettideline.app/quiz/">
+<meta property="og:title" content="Do your hard days follow your cycle?"><meta property="og:description" content="A 5-question check, then what a daily note would show you."><meta property="og:url" content="https://gettideline.app/quiz/"><meta property="og:image" content="https://gettideline.app/icon.png">
+<link rel="icon" href="../icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://gettideline.app/quiz/","url":"https://gettideline.app/quiz/","name":"Do your hard days follow your cycle? A 5-question check","inLanguage":"en","isPartOf":{"@type":"WebSite","url":"https://gettideline.app/","name":"Tideline"},"about":{"@id":"https://gettideline.app/#app"}},{"@type":"MobileApplication","@id":"https://gettideline.app/#app","name":"Tideline Period & PMDD Tracker","operatingSystem":"iOS","applicationCategory":"HealthApplication","url":"https://apps.apple.com/us/app/id6814561188"}]}</script>
+<style>
+  @font-face { font-family: Bodoni; src: url(../fonts/BodoniModa_400Regular.woff2) format("woff2"), url(../fonts/BodoniModa_400Regular.ttf); font-display: swap; }
+  @font-face { font-family: Jakarta; src: url(../fonts/PlusJakartaSans_400Regular.woff2) format("woff2"), url(../fonts/PlusJakartaSans_400Regular.ttf); font-display: swap; }
+  @font-face { font-family: Jakarta; font-weight: 600; src: url(../fonts/PlusJakartaSans_600SemiBold.woff2) format("woff2"), url(../fonts/PlusJakartaSans_600SemiBold.ttf); font-display: swap; }
+  :root { color-scheme: light; --card: #FDF9F4; --card-line: #F1DDDD; --gold: #C1A77F; --gold-deep: #795D3A; --accent: #B92C6F; --accent-ink: #91355C; --ink: #2B171F; --ink2: #644B51; --ink3: #8F7477; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; font: 17px/1.45 Jakarta, system-ui, sans-serif; color: var(--ink); background: linear-gradient(180deg, #E9AAB4 0%, #F5C9C8 30%, #FBE2D2 64%, #FDF1DE 100%) fixed; }
+  main { max-width: 30rem; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 20px 48px; display: grid; gap: 22px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 600; letter-spacing: .02em; }
+  .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  section { display: grid; gap: 14px; }
+  [hidden] { display: none !important; }
+  #pw-line { display: none; } /* the share card line; the read above is the result */
+  .eyebrow { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; }
+  h1 { font: 400 34px/1.1 Bodoni, "Iowan Old Style", Georgia, serif; margin: 0; text-wrap: balance; }
+  p { margin: 0; color: var(--ink2); }
+  .bar { height: 3px; background: rgba(255,255,255,.55); border-radius: 2px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--accent-ink); width: 0; transition: width .25s ease; }
+  .opts { display: grid; gap: 10px; }
+  button, a.btn { appearance: none; border: 1px solid var(--card-line); background: var(--card); color: var(--ink); font: inherit; padding: 16px 18px; border-radius: 18px; text-align: left; width: 100%; cursor: pointer; text-decoration: none; display: block; min-height: 52px; }
+  button:active { transform: scale(.99); }
+  button:focus-visible, a.btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+  .primary, a.btn.primary { background: var(--accent-ink); color: #fff; border-color: var(--accent-ink); text-align: center; font-weight: 600; border-radius: 999px; }
+  .plan { display: flex; justify-content: space-between; }
+  .plan[aria-pressed="true"] { border-color: var(--accent-ink); box-shadow: inset 0 0 0 1px var(--accent-ink); }
+  .small { font-size: 13px; color: var(--ink3); }
+  .result { background: var(--card); border: 1px solid var(--card-line); border-radius: 24px; padding: 18px; display: grid; gap: 8px; }
+  .result p { color: var(--ink); }
+  label.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--ink3); }
+  label.consent input { margin-top: 3px; accent-color: var(--accent-ink); }
+  footer { text-align: center; font-size: 13px; color: var(--ink3); }
+  footer a { color: var(--ink2); }
+</style>
+</head>
+<body>
+<main id="app">
+  <a class="brand" href="/"><img src="../icon.png" alt="" width="32" height="32">Tideline</a>
+  <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+  <section id="intro">
+    <span class="eyebrow">5 questions, about a minute</span>
+    <h1 id="headline"></h1>
+    <p id="sub">Answer five questions about your hardest days. You get a short read of what you told us and what a daily note would show you. Nothing here is a diagnosis.</p>
+    <label class="consent" style="margin-top:16px"><input type="checkbox" id="consent"> Let us measure which ad brought you here (Meta, TikTok). Optional.</label>
+    <button class="primary" id="start" style="margin-top:16px">Start</button>
+  </section>
+  <section id="quiz" hidden>
+    <h1 id="q"></h1>
+    <div class="opts" id="opts"></div>
+  </section>
+  <section id="paywall" hidden>
+    <span class="eyebrow">Your answers</span>
+    <h1 id="pw-title">Your result</h1>
+    <div class="result"><p id="pw-read"></p><p class="small" id="pw-line"></p></div>
+    <div class="opts" id="plans">
+      <button class="plan" data-plan="$rc_annual" aria-pressed="true"><span>Yearly</span><span class="small">best value</span></button>
+      <button class="plan" data-plan="$rc_monthly" aria-pressed="false"><span>Monthly</span><span class="small"></span></button>
+    </div>
+    <button class="primary" id="buy">Continue</button>
+    <p class="small">Prices, trial and the charge date are shown on the next screen before you pay. Cancel any time.</p>
+    <a class="btn" id="store" hidden>Or get the app on the App Store</a>
+  </section>
+  <section id="done" hidden>
+    <h1>You're in</h1>
+    <p>Open the app on this iPhone to unlock your purchase. The link works once and for 60 minutes.</p>
+    <a class="btn primary" id="redeem">Open in the app</a>
+    <p class="small" id="desktop" hidden>On a computer? Open this page on the iPhone where the app is installed, or check your email for a fresh link.</p>
+    <a class="btn" id="get-app" hidden>Get the app first</a>
+  </section>
+  <footer><a href="/">gettideline.app</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</main>
+<script>
+(function () {
+  var API = "https://income.146-59-68-85.nip.io/w2a/tideline", C = {"app": "tideline", "name": "Tideline", "headline": "Do your hard days follow your cycle?", "quiz": [{"q": "When do your hardest days usually come?", "options": ["The week or two before my period", "During my period", "No pattern I can see", "I am not sure"]}, {"q": "What hits hardest on those days?", "options": ["Irritability or rage", "Anxiety or dread", "Low mood or crying", "Body: cramps, bloating, tiredness"]}, {"q": "How much do they get in the way?", "options": ["A little", "Work or school suffers", "My relationships suffer", "Most things, most months"]}, {"q": "Have you tracked it before?", "options": ["Never", "Tried an app and stopped", "On paper", "Yes, I still do"]}, {"q": "What would help most?", "options": ["Knowing which days are coming", "A record for my doctor", "Something to do on a hard day", "Telling my partner ahead of time"]}], "card": {"name": "Tideline Cycle Card", "line": "My hard days, mapped to my cycle"}, "live": false, "appStoreUrl": "https://apps.apple.com/us/app/id6814561188"};
+  var qs = new URLSearchParams(location.search), $ = function (id) { return document.getElementById(id); };
+  var store = function (k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } };
+  function post(path, body) {
+    return fetch(API + path, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.message || r.status); return j; }); });
+  }
+  function show(id) { ["intro", "quiz", "paywall", "done"].forEach(function (s) { $(s).hidden = s !== id; }); }
+  document.title = document.title || C.name;
+  if (C.appStoreUrl) { $("store").href = C.appStoreUrl; $("store").hidden = false; $("get-app").href = C.appStoreUrl; }
+  if (!C.live) {  // no web checkout yet: the answers lead to the App Store, where prices and the trial are shown before paying
+    $("plans").hidden = true; $("store").hidden = true; $("buy").textContent = "Get Tideline on the App Store";
+    $("buy").nextElementSibling.textContent = "Free to download. Prices and any free trial are shown in the app before you pay.";
+  }
+
+  var redeem = qs.get("redeem_url");
+  if (redeem) {  // RevenueCat's custom success page redirect: rc-<id>://redeem_web_purchase?redemption_token=...
+    show("done"); $("bar").style.width = "100%";
+    if (/^[a-z][a-z0-9+.-]*:\/\/redeem_web_purchase\?/i.test(redeem)) $("redeem").href = redeem;
+    var iphone = /iPhone|iPad/.test(navigator.userAgent), back = store("w2a_visitor");
+    if (back && qs.get("app_user_id")) post("/return", { visitor: back, app_user_id: qs.get("app_user_id") }).catch(function () {});
+    $("desktop").hidden = iphone; $("get-app").hidden = !C.appStoreUrl;
+    return;
+  }
+
+  $("headline").textContent = C.headline || C.name;
+  if (C.subheadline) { $("sub").textContent = C.subheadline; }
+  var ref = (qs.get("ref") || "").toUpperCase();
+  if (/^[A-Z2-9]{6,10}$/.test(ref)) {  // an invite: the code goes with the visit, and is shown for the app's invite-code field
+    $("sub").textContent = "A friend invited you. Your invite code is " + ref + ": enter it in the app for free extra previews.";
+  }
+  var READ = [
+    "Your hardest days come before your period. That is the timing PMS and PMDD follow. A one-line note each day for one or two cycles shows whether it repeats, and that record is what a doctor asks for.",
+    "Your hardest days come during your period. A daily note shows which days are worst and what helped, so you can plan around them next time.",
+    "You see no pattern yet. That is common before anything is written down. A one-line note each day for two cycles shows whether your hard days line up with your cycle or not.",
+    "You are not sure when they come. A one-line note each day for two cycles answers that, without you having to remember."];
+  var first = -1;
+  var slides = C.slides || [], si = 0;
+  var visitor = store("w2a_visitor"), i = 0, quiz = C.quiz || [];
+  function begin() {
+    var b = { consent: $("consent").checked, ref: qs.get("ref") || "", url: location.origin + location.pathname,
+              fbc: qs.get("fbclid") ? "fb.1." + Date.now() + "." + qs.get("fbclid") : "", ttclid: qs.get("ttclid") || "" };
+    if (C.angle) b.angle = C.angle;
+    ["source", "medium", "campaign", "content"].forEach(function (k) { b["utm_" + k] = qs.get("utm_" + k) || ""; });
+    return post("/visit", b).then(function (j) { visitor = j.visitor; store("w2a_visitor", visitor); });
+  }
+  function showSlide() {
+    if (si >= slides.length) return ask();
+    var s = slides[si];
+    $("headline").textContent = s.title || C.headline || C.name;
+    $("sub").textContent = s.body || C.subheadline || "";
+    $("start").textContent = s.cta || "Next";
+    $("bar").style.width = Math.round(100 * si / (slides.length + quiz.length + 1)) + "%";
+  }
+  if (slides.length) showSlide();
+  function ask() {
+    $("bar").style.width = Math.round(100 * (slides.length + i) / (slides.length + quiz.length + 1)) + "%";
+    if (i >= quiz.length) {
+      post("/step", { visitor: visitor, step: i, done: true }).catch(function () {});
+      $("pw-line").textContent = (C.card && C.card.line) || "";
+      $("pw-read").textContent = READ[first] || READ[3];
+      return show("paywall");
+    }
+    show("quiz"); $("q").textContent = quiz[i].q; $("opts").innerHTML = "";
+    quiz[i].options.forEach(function (o, n) {
+      var b = document.createElement("button"); b.textContent = o;
+      b.onclick = function () { if (i === 0) first = n; i += 1; post("/step", { visitor: visitor, step: i }).catch(function () {}); ask(); };
+      $("opts").appendChild(b);
+    });
+  }
+  $("start").onclick = function () {
+    var ready = visitor ? Promise.resolve() : begin();
+    if (slides.length && si + 1 < slides.length) { si += 1; ready.then(showSlide, showSlide); return; }
+    ready.then(ask, ask);
+  };
+  var plan = "$rc_annual";
+  Array.prototype.forEach.call(document.querySelectorAll(".plan"), function (b) {
+    b.onclick = function () { plan = b.dataset.plan; document.querySelectorAll(".plan").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); };
+  });
+  $("buy").onclick = function () {
+    if (!C.live) { if (C.appStoreUrl) location.href = C.appStoreUrl; return; }
+    $("buy").disabled = true;
+    post("/checkout", { visitor: visitor, plan: plan }).then(function (j) { location.href = j.url; },
+      function () { $("buy").disabled = false; if (C.appStoreUrl) location.href = C.appStoreUrl; });
+  };
+})();
+</script>
+</body>
+</html>
